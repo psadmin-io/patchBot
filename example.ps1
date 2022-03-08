@@ -3,7 +3,7 @@
 
 # Look for the latest HR Image on Linux (Native OS)
 Find-LatestMOSPatch -Product '21858' `
-                    -Platform '266P' `
+                    -Platform '226P' `
                     -Release '27001300090200' `
                     -Description 'PEOPLESOFT%25UPDATE%25NATIVE+OS' `
                     -Notify 'slack' `

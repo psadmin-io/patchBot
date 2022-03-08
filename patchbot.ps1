@@ -13,12 +13,12 @@ Function Get-MyOracleSupportCredential {
         $userFile = ".user"
         $securePasswordFile = ".credentials"
 
-        if(![System.IO.File]::Exists(${userFile})){
+        if( !( Test-Path -Path ${userFile} -PathType Leaf ) ){
             Write-Host "Enter your MOS Username: " -Foreground Black -Background Yellow
             read-host | out-file ${userFile}
         }
 
-        if(![System.IO.File]::Exists($securePasswordFile)){
+        if( !( Test-Path -Path ${securePasswordFile} -PathType Leaf ) ){
             Write-Host "Enter your MOS Password: " -Foreground Black -Background Yellow
             read-host -assecurestring  | convertfrom-securestring | out-file ${securePasswordFile}
         }

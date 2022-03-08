@@ -18,6 +18,8 @@ Find-LatestMOSPatch -Product '21858' `
                     -Channel '<slack channel>'
 ```
 
+`patchBot` will store the last patch returned my MOS in the current working directory. It uses that patch number to compare against future runs to determine if a new patch was released.
+
 ## Parameters for Find-LatestMOSPatch
 
 There are 3 required fields: `Product`, `Release`, and `Platform`. Below are some examples of the values you can use to search for PeopleSoft releases.
@@ -45,6 +47,10 @@ If you want to search for products that don't have values listed here, you can u
   * Windows: `233P`
   * Linux: `226P`
 
+*Optional*
+
+* `Description`: Use the description field to narrow down patches you want to watch. `patchBot` will take the top result so you can often use the description field to filter out patches you want to ignore. For example, if you want notifications for PeopleTools patch releases, the PeopleTools product will give you results that include the ELK DPK and other various patches. Use the description `%25Product%25Patch%25DPK` to only return the PeopleTools Patches. The description should be URL encoded (the string is added to the end of the MOS search). To filter for PeopleSoft Image releases, you can use the description `PEOPLESOFT%25UPDATE%25NATIVE+OS`.
+  
 ## MOS Credentials
 
 `patchBot` can store your MOS credentials to file so it can be scripted and set to run on a schedule. The MOS Username is stored in `.user` and the password is hashed and stored in `.credentials`. 
