@@ -5,6 +5,12 @@
 Find-LatestMOSPatch -Product '21858' `
                     -Platform '226P' `
                     -Release '27001300090200' `
+                    -Description 'PEOPLESOFT%25UPDATE%25NATIVE+OS'
+
+# With Slack Notification
+Find-LatestMOSPatch -Product '21858' `
+                    -Platform '226P' `
+                    -Release '27001300090200' `
                     -Description 'PEOPLESOFT%25UPDATE%25NATIVE+OS' `
                     -Notify 'slack' `
                     -WebHookURL 'https://hooks.slack.com/services/<TOKEN>' `

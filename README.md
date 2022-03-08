@@ -18,7 +18,7 @@ Find-LatestMOSPatch -Product '21858' `
                     -Channel '<slack channel>'
 ```
 
-`patchBot` will store the last patch returned my MOS in the current working directory. It uses that patch number to compare against future runs to determine if a new patch was released.
+`patchBot` will store the last patch returned from MOS in the current working directory in a `.txt` file. It uses that patch number to compare against future runs to determine if a new patch was released.
 
 ## Parameters for Find-LatestMOSPatch
 
