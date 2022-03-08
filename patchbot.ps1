@@ -95,7 +95,7 @@ Function Get-LatestPatchNumber {
     [CmdletBinding()]
   
     Param(
-        [Parameter(Mandatory = $True)][Microsoft.PowerShell.Commands.WebRequestSession] ${MOSSession},
+        [Parameter(Mandatory = $True)][Microsoft.PowerShell.Commands.WebRequestSession] ${session},
         [Parameter(Mandatory = $True)][String] ${Product},
         [Parameter(Mandatory = $True)][String] ${Release},
         [Parameter(Mandatory = $True)][String] ${Platform},
@@ -114,30 +114,47 @@ Function Get-LatestPatchNumber {
         Write-Verbose "Search URL: ${searchURL}"
         $patchPage = Invoke-WebRequest -Uri $searchURL `
                                        -UserAgent "Mozilla/5.0" `
-                                       -WebSession ${MOSSession} `
+                                       -WebSession ${session} `
                                        -UseBasicParsing
 
-        # Grab the (only) link, and the first parameters of the link (patch_num)
-        $latestPatch = 
-            (
-                (
-                    $patchPage.links.href | select-string "^/Orion"
-                ) -split '[&=]'
-            )[1]
-        Write-Verbose "Latest Patch: ${latestPatch}"
+        try {
+            
 
-        # Look for 'Patchset' in a table; there are many in lists the patch is in a table
-        $patchset = 
-            ( 
+            # Look for 'Patchset' in a table; the text exists in lists, but the patch we want is in a table
+            $patchResults = ( 
+                    $patchPage | Select-Object -ExpandProperty RawContent
+                ).toString() -Split '[\r\n]' | Select-String "OraTableCellText.*Patchset"
+
+            if ($patchResults) {
+                Write-Verbose "Parsing all patch results"
+
+                # Grab the link, and the first parameters of the link (patch_num)
+                $latestPatch = 
                 (
                     (
-                        ( 
-                            $patchPage | Select-Object -ExpandProperty RawContent
-                        ).toString() -Split '[\r\n]' | Select-String "OraTableCellText.*Patchset"
-                    ).ToString() -split 'Patchset<br>'
-                )[1].ToString() -split '</td>'
-            )[0]
-        Write-Verbose "Latest Patchset: ${patchset}"
+                        $patchPage.links.href | select-string "^/Orion"
+                    ) -split '[&=]'
+                )[1]
+                Write-Verbose "Latest Patch Number: ${latestPatch}"
+
+                # Parse the results by splitting on 'Patchset', grab the first result and grab the Title
+                $patchset = 
+                    ( 
+                        (
+                            $patchResults -split 'Patchset<br>'
+                        )[1].ToString() -split '</td>'
+                    )[0]
+                Write-Verbose "Latest Patchset: ${patchset}"
+            } else {
+                Write-Verbose "No patches found"
+                $latestPatch = ""
+                $patchset = ""
+            }
+            
+        }
+        catch {
+           Write-Verbse "Error getting patches; refine your search: $searchURL"
+        }
         
         # Compare to last patch
         Write-Verbose "Previous: ${previousPatch} | Current: ${latestPatch}"
@@ -204,7 +221,7 @@ Function Find-LatestMOSPatch {
 
         if (${session}) {
             # HR Image - Linux Native OS
-            ${new}, ${patch}, ${descr} = Get-LatestPatchNumber -MOSSession ${session} `
+            ${new}, ${patch}, ${descr} = Get-LatestPatchNumber -Session ${session} `
                                                         -Product ${Product} `
                                                         -Release ${Release} `
                                                         -Platform ${Platform} `

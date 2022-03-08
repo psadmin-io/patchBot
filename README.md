@@ -34,7 +34,7 @@ If you want to search for products that don't have values listed here, you can u
   * PeopleSoft ELM: `21612`
   * PeopleSoft CS: `21591`
   * PeopleSoft Cloud Manager: `38378`
-  * PeopleTools: `21917`
+  * PeopleTools: `21918`
   
 * `Release`: 
   * PeopleSoft 9.2 (Applications): `27001300090200`
