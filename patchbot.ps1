@@ -3,7 +3,7 @@
 # Valid values: "Stop", "Inquire", "Continue", "Suspend", "SilentlyContinue"
 $ErrorActionPreference = "Stop"
 $DebugPreference = "SilentlyContinue"
-$VerbosePreference = "Continue"
+$VerbosePreference = "SilentlyContinue"
 [Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
 
 #------------------------------------------------------------[Functions]----------------------------------------------------------
@@ -103,6 +103,7 @@ Function Get-LatestPatchNumber {
     )
 
     Begin {
+        ${ProgressPreference} = 'SilentlyContinue'
         $searchURL="https://updates.oracle.com/Orion/AdvancedSearch/process_form?product=${Product}&release=${Release}&plat_lang=${Platform}&description=${Description}"
     }
 
@@ -179,7 +180,7 @@ Function Set-SlackNotification {
         [Parameter(Mandatory = $True)][String] ${Channel}
     ) 
     Begin {
-
+        ${ProgressPreference} = 'SilentlyContinue'
     }
     Process {
 

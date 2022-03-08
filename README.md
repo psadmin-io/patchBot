@@ -33,8 +33,9 @@ If you want to search for products that don't have values listed here, you can u
   * PeopleSoft FSCM: `21707`
   * PeopleSoft ELM: `21612`
   * PeopleSoft CS: `21591`
-  * PeopleSoft Cloud Manager: `38378`
-  * PeopleTools: `21918`
+  * PeopleSoft CRM: `21523`
+  * PeopleSoft Cloud Manager (IH): `38378`
+  * PeopleTools: `21917` (or `21918`)
   
 * `Release`: 
   * PeopleSoft 9.2 (Applications): `27001300090200`
@@ -50,6 +51,7 @@ If you want to search for products that don't have values listed here, you can u
 *Optional*
 
 * `Description`: Use the description field to narrow down patches you want to watch. `patchBot` will take the top result so you can often use the description field to filter out patches you want to ignore. For example, if you want notifications for PeopleTools patch releases, the PeopleTools product will give you results that include the ELK DPK and other various patches. Use the description `%25Product%25Patch%25DPK` to only return the PeopleTools Patches. The description should be URL encoded (the string is added to the end of the MOS search). To filter for PeopleSoft Image releases, you can use the description `PEOPLESOFT%25UPDATE%25NATIVE+OS`.
+* `Notify`: Currently, only Slack notifications are supported. If you pass in the value `slack`, you need to provide the `WebhookURL`, `Username` and `Channel` parameters.
   
 ## MOS Credentials
 
