@@ -1,2 +1,6 @@
+# MOS Credentials
 .user
 .credentials
+
+# Patch Storage Files
+*.txt
