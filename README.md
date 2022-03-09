@@ -50,6 +50,8 @@ If you want to search for products that don't have values listed here, you can u
   * HP-UX: `197P`
   * AIX: `212P`
 
+> To find the codes for your product or platform, you can use the [Advanced Search](https://updates.oracle.com/Orion/AdvancedSearch/process_form) page to select your criteria and then look in the URL to grab the codes.
+
 *Optional*
 
 * `Description`: Use the description field to narrow down patches you want to watch. `patchBot` will take the top result so you can often use the description field to filter out patches you want to ignore. For example, if you want notifications for PeopleTools patch releases, the PeopleTools product will give you results that include the ELK DPK and other various patches. Use the description `%25Product%25Patch%25DPK` to only return the PeopleTools Patches. The description should be URL encoded (the string is added to the end of the MOS search). To filter for PeopleSoft Image releases, you can use the description `PEOPLESOFT%25UPDATE%25NATIVE+OS`.
