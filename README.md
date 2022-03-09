@@ -47,6 +47,8 @@ If you want to search for products that don't have values listed here, you can u
 * `Platform`
   * Windows: `233P`
   * Linux: `226P`
+  * HP-UX: `197P`
+  * AIX: '212P`
 
 *Optional*
 
