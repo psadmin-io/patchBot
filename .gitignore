@@ -1,6 +1,9 @@
 # MOS Credentials
 .user
 .credentials
+**/.user
+**/.credentials
 
 # Patch Storage Files
 *.txt
+**/*.txt
