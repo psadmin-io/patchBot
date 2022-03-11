@@ -47,6 +47,10 @@ If you want to search for products that don't have values listed here, you can u
 * `Platform`
   * Windows: `233P`
   * Linux: `226P`
+  * HP-UX: `197P`
+  * AIX: `212P`
+
+> To find the codes for your product or platform, you can use the [Advanced Search](https://updates.oracle.com/Orion/AdvancedSearch/process_form) page to select your criteria and then look in the URL to grab the codes.
 
 *Optional*
 
