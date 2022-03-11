@@ -59,3 +59,26 @@ If you want to search for products that don't have values listed here, you can u
 
 The first time you run `patchBot`, it will prompt you to enter the MOS credentials to use. To change the password, delete the `.credentials` file and re-run `patchBot`.
 
+## Tips
+
+Some searches might include the same product and release and only the description changes (e.g, PeopleTools Patches and the Infrastructure DPK). `patchBot` uses the product and release in the storage file, so you the patch numbers will overwrite each other. To get around this, run `patchBot` in different folders to separate your storage.
+
+```powershell
+set-location $PATCHBOT_BASE\pt 
+
+# PeopleTools - 8.58
+Find-LatestMOSPatch -Product '21918' `
+                    -Platform '226P' `
+                    -Release '600000000115152' `
+                    -Description '%25Product%25Patch%25DPK'
+
+set-location $PATCHBOT_BASE\infra
+
+# PeopleTools - 8.58 - INFRA-DPK
+Find-LatestMOSPatch -Product '21918' `
+                    -Platform '226P' `
+                    -Release '600000000115152' `
+                    -Description '%INFRA%'
+```
+
+When you do this, you will need to copy your `.user` and `.credential` files to the subfolder for MOS authentication.
