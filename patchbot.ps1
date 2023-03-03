@@ -230,7 +230,7 @@ Function Find-LatestMOSPatch {
 
             if (${new}) {
 
-                ${Message} = "${descr} is available: ${patch}"
+                ${Message} = "**${descr}** is available: ``${patch}``"
 
                 switch (${Notify}) {
                     'slack' { 
