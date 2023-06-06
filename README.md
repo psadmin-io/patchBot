@@ -1,8 +1,8 @@
 # patchbot for My Oracle Support
 
-patchBot is a set of Powershell functions to make it easy to watch for new releases on My Oracle Support. Call `Find-LatestMOSPatch` and patchBot will look for the latest patch release. If the release is newer than the last run, it can notify you that a new patch is available.
+patchBot is a set of Powershell and Python functions to make it easy to watch for new releases on My Oracle Support. Call `Find-LatestMOSPatch` or `find_latest_mos_patch` and patchBot will look for the latest patch release. If the release is newer than the last run, it can notify you that a new patch is available.
 
-*Example*
+*Powershell Example*
 
 ```powershell
 . .\patchbot.ps1
@@ -16,6 +16,18 @@ Find-LatestMOSPatch -Product '21858' `
                     -WebHookURL 'https://hooks.slack.com/services/<TOKEN>' `
                     -Username '<slack username>' `
                     -Channel '<slack channel>'
+```
+
+*Python Example*
+
+```python
+from patchBot import find_latest_mos_patch
+
+# Look for the latest HR Image on Linux (Native OS)
+find_latest_mos_patch("21858", "27001300090200", "226P", "PEOPLESOFT%25UPDATE%25NATIVE+OS")
+
+# With Slack Notification
+find_latest_mos_patch("21858", "27001300090200", "226P", "PEOPLESOFT%25UPDATE%25NATIVE+OS", "slack", "https://hooks.slack.com/services/TOKEN", "slackusername", "slackchannel")
 ```
 
 `patchBot` will store the last patch returned from MOS in the current working directory in a `.txt` file. It uses that patch number to compare against future runs to determine if a new patch was released.
@@ -85,4 +97,4 @@ Find-LatestMOSPatch -Product '21918' `
                     -Description '%INFRA%'
 ```
 
-When you do this, you will need to copy your `.user` and `.credential` files to the subfolder for MOS authentication.
+When you do this, you will need to copy your `.user` and `.credential` (and `.encryptkey` for Python) files to the subfolder for MOS authentication.
