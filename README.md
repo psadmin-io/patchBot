@@ -41,7 +41,7 @@ If you want to search for products that don't have values listed here, you can u
 *Required*
 
 * `Product`: 
-  * PeopleSoft HCM: `21612`
+  * PeopleSoft HCM: `21858`
   * PeopleSoft FSCM: `21707`
   * PeopleSoft ELM: `21612`
   * PeopleSoft CS: `21591`

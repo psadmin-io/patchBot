@@ -130,7 +130,10 @@ def get_latest_patch_number(session, product, release, platform, description=Non
                 break
         
         # Find Patch Number
-        latest_patch = rows[1].find('td', class_='OraTableCellNumber').text.strip()
+        cell = None
+        cell = rows[1].find('td', class_='OraTableCellNumber')
+        if cell:
+            latest_patch = cell.text.strip()
 
         # Get Platform Friendly Name - Default is Platform Code
         friendly_name = None
