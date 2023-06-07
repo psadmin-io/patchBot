@@ -5,6 +5,7 @@ patchBot is a set of Powershell and Python functions to make it easy to watch fo
 *Powershell Example*
 
 ```powershell
+git clone https://github.com/psadmin-io/patchBot.git; cd patchBot
 . .\patchbot.ps1
 
 # Look for the latest HR Image on Linux (Native OS)
@@ -20,6 +21,15 @@ Find-LatestMOSPatch -Product '21858' `
 
 *Python Example*
 
+First, install Python modules with `pip`.
+
+```bash
+git clone https://github.com/psadmin-io/patchBot.git && cd patchBot
+python3 -m pip install -r requirements.txt
+```
+
+Then, create a python script to call `patchBot` and search for your patches.
+
 ```python
 from patchBot import find_latest_mos_patch
 
@@ -31,6 +41,8 @@ find_latest_mos_patch("21858", "27001300090200", "226P", "PEOPLESOFT%25UPDATE%25
 ```
 
 `patchBot` will store the last patch returned from MOS in the current working directory in a `.txt` file. It uses that patch number to compare against future runs to determine if a new patch was released.
+
+There is also `slack.py` that shows how to load a list of products and releases from YAML and check for updates.
 
 ## Parameters for Find-LatestMOSPatch
 
