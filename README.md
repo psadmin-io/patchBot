@@ -58,12 +58,13 @@ If you want to search for products that don't have values listed here, you can u
   * PeopleSoft ELM: `21612`
   * PeopleSoft CS: `21591`
   * PeopleSoft CRM: `21523`
+  * PeopleSoft IH: `21924` 
   * PeopleSoft Cloud Manager (IH): `38378`
   * PeopleTools: `21917` (or `21918`)
   
 * `Release`: 
   * PeopleSoft 9.2 (Applications): `27001300090200`
-  * Cloud Manager: `27001300090100`
+  * Cloud Manager and Interaction Hub: `27001300090100`
   * PeopleTools 8.58: `600000000115152`
   * PeopleTools 8.59: `600000000156683`
   * PeopleTools 8.60: `600000000171694`
