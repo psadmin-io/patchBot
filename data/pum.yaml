@@ -1,0 +1,15 @@
+---
+descr:
+  native: PEOPLESOFT%25UPDATE%25NATIVE+OS
+  virtual: PEOPLESOFT%25UPDATE%25VIRTUAL+BOX
+platform:
+  Linux: 226P
+product:
+  crm: '21523'
+  cs: '21591'
+  elm: '21612'
+  fscm: '21707'
+  hcm: '21858'
+  ih: '38378'
+release:
+  '9.2': '27001300090200'

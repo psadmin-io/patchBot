@@ -1,11 +1,9 @@
 import getpass
 import json
-import re
 import os
 import requests
 from bs4 import BeautifulSoup
 from requests.auth import HTTPBasicAuth
-# from http.cookiejar import MozillaCookieJar
 from cryptography.fernet import Fernet
 import logging
 
@@ -169,15 +167,19 @@ def set_slack_notification(webhook_url, message, username, channel):
         raise Exception(f"Failed to post to Slack: {e}")
 
 
-def find_latest_mos_patch(product, release, platform, description=None, notify=None, webhook_url=None, username=None, channel=None):
+def find_latest_mos_patch(product, release, platform, description=None, notify=None, webhook_url=None, username=None, channel=None, debug=False):
     username, password = get_my_oracle_support_credential()
     session = get_my_oracle_support_session(username, password)
+
+    if debug:
+        logging.basicConfig(level=logging.DEBUG)
 
     if session:
         new_patch, patch, descr = get_latest_patch_number(session, product, release, platform, description)
 
         if new_patch:
             message = f"*{descr}* is available: `{patch}`"
+            logging.info(f"  - New Patch: {patch}")
             # mosbot = f"/mos patch {patch}"
             if notify == "slack":
                 set_slack_notification(webhook_url, message, username, channel)
@@ -185,8 +187,6 @@ def find_latest_mos_patch(product, release, platform, description=None, notify=N
             elif notify == "teams":
                 # Future implementation for Microsoft Teams
                 pass
-            else:
-                print(message)
 
 
 
