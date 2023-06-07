@@ -37,7 +37,7 @@ from patchBot import find_latest_mos_patch
 find_latest_mos_patch("21858", "27001300090200", "226P", "PEOPLESOFT%25UPDATE%25NATIVE+OS")
 
 # With Slack Notification
-find_latest_mos_patch("21858", "27001300090200", "226P", "PEOPLESOFT%25UPDATE%25NATIVE+OS", "slack", "https://hooks.slack.com/services/TOKEN", "slackusername", "slackchannel")
+find_latest_mos_patch("21858", "27001300090200", "226P", "PEOPLESOFT%25UPDATE%25NATIVE+OS", "native", "slack", "https://hooks.slack.com/services/TOKEN", "slackusername", "slackchannel")
 ```
 
 `patchBot` will store the last patch returned from MOS in the current working directory in a `.txt` file. It uses that patch number to compare against future runs to determine if a new patch was released.

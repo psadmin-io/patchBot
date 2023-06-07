@@ -98,9 +98,12 @@ def get_my_oracle_support_session(username, password):
         logging.error("Issue getting MOS auth token")
         raise
 
-def get_latest_patch_number(session, product, release, platform, description=None):
+def get_latest_patch_number(session, product, release, platform, description=None, descr_key=None):
     search_url = f"https://updates.oracle.com/Orion/AdvancedSearch/process_form?product={product}&release={release}&plat_lang={platform}&description={description}"
-    previous_patch_file = f"{product}_{release}_{platform}.txt"
+    if descr_key:
+        previous_patch_file = f"{product}_{release}_{platform}_{descr_key}.txt"
+    else:
+        previous_patch_file = f"{product}_{release}_{platform}.txt"
     previous_patch = ""
     new_patch = False
     patch_descr = None
@@ -139,6 +142,8 @@ def get_latest_patch_number(session, product, release, platform, description=Non
         if friendly_name:
             platform = friendly_name.split(' : ')[1].rstrip()
 
+        logging.debug(f"Latest Patch: {latest_patch}")
+        logging.debug(f"Previous Patch: {previous_patch}")
         if latest_patch != previous_patch:
                 new_patch = True
                 with open(previous_patch_file, "w") as f:
@@ -167,7 +172,7 @@ def set_slack_notification(webhook_url, message, username, channel):
         raise Exception(f"Failed to post to Slack: {e}")
 
 
-def find_latest_mos_patch(product, release, platform, description=None, notify=None, webhook_url=None, username=None, channel=None, debug=False):
+def find_latest_mos_patch(product, release, platform, description=None, key=None, notify=None, webhook_url=None, username=None, channel=None, debug=False):
     username, password = get_my_oracle_support_credential()
     session = get_my_oracle_support_session(username, password)
 
@@ -175,7 +180,7 @@ def find_latest_mos_patch(product, release, platform, description=None, notify=N
         logging.basicConfig(level=logging.DEBUG)
 
     if session:
-        new_patch, patch, descr = get_latest_patch_number(session, product, release, platform, description)
+        new_patch, patch, descr = get_latest_patch_number(session, product, release, platform, description, key)
 
         if new_patch:
             message = f"*{descr}* is available: <https://support.oracle.com/epmos/faces/PatchResultsNDetails?patchId={patch}|{patch}>"
