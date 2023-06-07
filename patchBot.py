@@ -178,7 +178,7 @@ def find_latest_mos_patch(product, release, platform, description=None, notify=N
         new_patch, patch, descr = get_latest_patch_number(session, product, release, platform, description)
 
         if new_patch:
-            message = f"*{descr}* is available: `{patch}`"
+            message = f"*{descr}* is available: <https://support.oracle.com/epmos/faces/PatchResultsNDetails?patchId={patch}|{patch}>"
             logging.info(f"  - New Patch: {patch}")
             # mosbot = f"/mos patch {patch}"
             if notify == "slack":

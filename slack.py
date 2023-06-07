@@ -21,4 +21,4 @@ for release_name, release_code in patches['release'].items():
     for product_name, product_code in patches['product'].items():
       for descr_name, descr_code in patches['descr'].items():
         logging.info(f"Searching for: {release_name} - {platform_name} - {product_name} - {descr_name}")
-        find_latest_mos_patch(product_code, release_code, platform_code, descr_code, "slack", f"https://hooks.slack.com/services/{args.token}", "patchbot", "#patch-notifications", False)
+        find_latest_mos_patch(product_code, release_code, platform_code, descr_code, "slack", f"https://hooks.slack.com/services/{args.token}", "patchbot", "#patchBot", False)
