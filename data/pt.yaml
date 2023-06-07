@@ -1,12 +1,13 @@
 ---
 descr:
   dpk: '%25Product%25Patch%25DPK'
+  infra: '%INFRA%'
 platform:
   AIX: 212P
   Linux: 226P
   Windows: 233P
 product:
-  pt: '21917'
+  pt: '21918'
 release:
   '8.58': '600000000115152'
   '8.59': '600000000156683'
