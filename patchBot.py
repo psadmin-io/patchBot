@@ -149,6 +149,7 @@ def get_latest_patch_number(session, product, release, platform, description=Non
                 with open(previous_patch_file, "w") as f:
                     f.write(latest_patch)
         else:
+            logging.info(f"  - Existing Patch Number: {latest_patch}")
             latest_patch = ""
 
     except Exception as e:
