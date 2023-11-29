@@ -99,6 +99,7 @@ def get_my_oracle_support_session(username, password):
         raise
 
 def get_latest_patch_number(session, product, release, platform, description=None, descr_key=None):
+    latest_patch = ''
     search_url = f"https://updates.oracle.com/Orion/AdvancedSearch/process_form?product={product}&release={release}&plat_lang={platform}&description={description}"
     if descr_key:
         previous_patch_file = f"{product}_{release}_{platform}_{descr_key}.txt"
@@ -142,7 +143,7 @@ def get_latest_patch_number(session, product, release, platform, description=Non
         if friendly_name:
             platform = friendly_name.split(' : ')[1].rstrip()
 
-        if latest_patch:
+        if latest_patch == '':
             logging.debug(f"Latest Patch: {latest_patch}")
             logging.debug(f"Previous Patch: {previous_patch}")
             if latest_patch != previous_patch:
