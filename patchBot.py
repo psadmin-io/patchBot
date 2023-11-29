@@ -142,15 +142,18 @@ def get_latest_patch_number(session, product, release, platform, description=Non
         if friendly_name:
             platform = friendly_name.split(' : ')[1].rstrip()
 
-        logging.debug(f"Latest Patch: {latest_patch}")
-        logging.debug(f"Previous Patch: {previous_patch}")
-        if latest_patch != previous_patch:
-                new_patch = True
-                with open(previous_patch_file, "w") as f:
-                    f.write(latest_patch)
+        if latest_patch:
+            logging.debug(f"Latest Patch: {latest_patch}")
+            logging.debug(f"Previous Patch: {previous_patch}")
+            if latest_patch != previous_patch:
+                    new_patch = True
+                    with open(previous_patch_file, "w") as f:
+                        f.write(latest_patch)
+            else:
+                logging.info(f"  - Existing Patch Number: {latest_patch}")
+                latest_patch = ""
         else:
-            logging.info(f"  - Existing Patch Number: {latest_patch}")
-            latest_patch = ""
+            logging.info(f"No patches found for ${product}, ${release}, ${platform}")
 
     except Exception as e:
         raise Exception(f"Error getting patches; refine your search: {search_url}")

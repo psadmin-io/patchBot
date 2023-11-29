@@ -16,4 +16,5 @@ venv*
 !requirements.txt
 
 # Testing scripts
-test.py
+test.pyrundeck
+rundeck/*
